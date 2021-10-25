@@ -70,7 +70,7 @@
       "projectType": "application",
       "root": "apps/frontend",
       "sourceRoot": "apps/frontend/src",
-      "prefix": "nx-test",
+      "prefix": "nx-stack",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

@@ -1,5 +1,5 @@
 {
-  "npmScope": "nx-test",
+  "npmScope": "nx-stack",
   "affected": {
     "defaultBase": "master"
   },

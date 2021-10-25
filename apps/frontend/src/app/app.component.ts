@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Message } from '@nx-test/api-interfaces';
+import { Message } from '@nx-stack/api-interfaces';
 
 @Component({
-  selector: 'nx-test-root',
+  selector: 'nx-stack-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
