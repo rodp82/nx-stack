@@ -1,10 +1,20 @@
-import { CfnOutput, Construct, Duration, Stack, StackProps } from '@aws-cdk/core';
+import {
+  CfnOutput,
+  Construct,
+  Duration,
+  Stack,
+  StackProps,
+} from '@aws-cdk/core';
 import { Bucket } from '@aws-cdk/aws-s3';
 import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
 import { HttpApi, HttpMethod } from '@aws-cdk/aws-apigatewayv2';
 import { HttpLambdaIntegration } from '@aws-cdk/aws-apigatewayv2-integrations';
 import { Code, LayerVersion, Runtime } from '@aws-cdk/aws-lambda';
-import { NodejsFunction, NodejsFunctionProps, SourceMapMode } from '@aws-cdk/aws-lambda-nodejs';
+import {
+  NodejsFunction,
+  NodejsFunctionProps,
+  SourceMapMode,
+} from '@aws-cdk/aws-lambda-nodejs';
 
 import { join } from 'path';
 
@@ -15,17 +25,19 @@ export class AppStack extends Stack {
     // Frontend
     const websiteBucket = new Bucket(this, 'NxStackFronted', {
       websiteIndexDocument: 'index.html',
-      publicReadAccess: true
+      publicReadAccess: true,
     });
 
     new BucketDeployment(this, 'NxStackFrontendDeployment', {
-      sources: [Source.asset(join(__dirname, '../../../../dist/apps/frontend'))],
-      destinationBucket: websiteBucket
+      sources: [
+        Source.asset(join(__dirname, '../../../../dist/apps/frontend')),
+      ],
+      destinationBucket: websiteBucket,
     });
 
     new CfnOutput(this, 'URL', {
       description: 'The url of the website',
-      value: websiteBucket.bucketWebsiteUrl
+      value: websiteBucket.bucketWebsiteUrl,
     });
 
     // Backend
@@ -55,13 +67,17 @@ export class AppStack extends Stack {
     const httpApi = new HttpApi(this, 'HttpApi', {
       description: 'HTTP API Gateway',
       defaultAuthorizationScopes: [],
-    })
+    });
 
     httpApi.addRoutes({
       path: '/{proxy+}',
-      methods: [HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE],
+      methods: [
+        HttpMethod.GET,
+        HttpMethod.POST,
+        HttpMethod.PUT,
+        HttpMethod.DELETE,
+      ],
       integration: new HttpLambdaIntegration('LambdaIntegration', lambda),
-    })
+    });
   }
 }
-

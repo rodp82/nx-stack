@@ -7,7 +7,6 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
-    
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'frontend'),
       exclude: ['/api*'],
