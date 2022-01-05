@@ -39,6 +39,9 @@
     "frontend-e2e": {
       "tags": [],
       "implicitDependencies": ["frontend"]
+    },
+    "infrastructure": {
+      "tags": []
     }
   }
 }
