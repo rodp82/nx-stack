@@ -5,11 +5,16 @@
   "scripts": {
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
-    "start": "nx serve",
+    "start": "nx run-many --target=serve --projects=frontend,api",
+    "start:ui": "nx serve frontend",
+    "start:api": "nx serve api",
     "build": "nx build",
-    "build:frontend": "nx build frontend",
+    "build:ui": "nx build frontend",
+    "build:ui:prod": "nx build frontend --configuration=production",
     "build:api": "nx build api",
-    "test": "nx test"
+    "build:api:prod": "set NODE_ENV=production && nx build api --configuration=production",
+    "test": "nx test",
+    "deploy": "nx run infrastructure:deploy"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +37,8 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/serve-static": "^2.2.2",
     "@nrwl/angular": "13.4.3",
+    "@vendia/serverless-express": "^4.5.2",
+    "fastify-static": "^4.5.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",
     "tslib": "^2.0.0",
@@ -59,6 +66,7 @@
     "@nrwl/node": "13.4.3",
     "@nrwl/tao": "13.4.3",
     "@nrwl/workspace": "13.4.3",
+    "@types/aws-lambda": "^8.10.89",
     "@types/jest": "27.0.2",
     "@types/node": "14.14.33",
     "@typescript-eslint/eslint-plugin": "5.3.1",
